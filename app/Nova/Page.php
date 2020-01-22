@@ -57,7 +57,7 @@ class Page extends Resource
                 ->rules('required')
                 ->sortable()
             ,
-            Text::make('Slug')
+            Text::make('Slug')->rules('required')
             ,
             Translatable::make('Content')
                 ->trix()
@@ -73,7 +73,7 @@ class Page extends Resource
             Images::make('Image', 'image')
                 ->conversionOnIndexView('thumb')
             ,
-            Boolean::make('Status' , 'status')->rules('required')->sortable()
+            Boolean::make('Enabled ?' , 'status')->rules('required')->sortable()
             ,
         ];
     }

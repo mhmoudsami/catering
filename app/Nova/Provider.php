@@ -13,6 +13,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\BelongsToMany;
+use Fourstacks\NovaCheckboxes\Checkboxes;
 
 class Provider extends Resource
 {
@@ -85,8 +86,7 @@ class Provider extends Resource
                 ->rules('required'),
 
 
-
-            Boolean::make('Active ?' , 'status')->rules('required')->sortable(),
+            Boolean::make('Enabled ?' , 'status')->rules('required')->sortable(),
 
             new Panel('Login Information', [
 

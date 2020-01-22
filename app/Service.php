@@ -13,8 +13,23 @@ class Service extends Model implements HasMedia
 {
 	use SoftDeletes, HasTranslations, HasMediaTrait;
 
+    /**
+     * translatable
+     */
 	public $translatable = ['name', 'description'];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'requirements' => 'array',
+    ];
+
+    /**
+     * register media conversion
+     */
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')
@@ -22,6 +37,9 @@ class Service extends Model implements HasMedia
             ->height(130);
     }
 
+    /**
+     * register media collection
+     */
     public function registerMediaCollections()
     {
         $this->addMediaCollection('image')->singleFile();

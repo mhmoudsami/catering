@@ -54,7 +54,7 @@ class City extends Resource
                 ->rules('required')
                 ->sortable()
             ,
-            Boolean::make('Status' , 'status')->rules('required')->sortable()
+            Boolean::make('Enabled ?' , 'status')->rules('required')->sortable()
             ,
         ];
     }

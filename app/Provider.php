@@ -43,8 +43,13 @@ class Provider extends Authenticatable implements HasMedia
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'cities' => 'array',
+        'services' => 'array',
     ];
 
+    /**
+     * register media conversion
+     */
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')
@@ -52,6 +57,9 @@ class Provider extends Authenticatable implements HasMedia
             ->height(130);
     }
 
+    /**
+     * register media collection
+     */
     public function registerMediaCollections()
     {
         $this->addMediaCollection('image')->singleFile();

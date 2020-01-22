@@ -105,7 +105,7 @@ class Service extends Resource
                 // ->displayUncheckedValuesOnDetail()
                 ->hideFromIndex(),
 
-            Boolean::make('Active ?' , 'status')->rules('required')->sortable(),
+            Boolean::make('Enabled ?' , 'status')->rules('required')->sortable(),
         ];
     }
 
