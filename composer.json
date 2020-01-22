@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "davidpiesse/nova-toggle": "^0.0.6",
+        "doctrine/dbal": "^2.10",
         "ebess/advanced-nova-media-library": "^2.9",
         "epartment/nova-dependency-container": "^1.2",
         "ericlagarda/nova-embed": "^1.3",

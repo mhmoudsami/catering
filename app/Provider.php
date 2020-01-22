@@ -48,6 +48,14 @@ class Provider extends Authenticatable implements HasMedia
     ];
 
     /**
+     * check if user is active
+     */
+    public function getIsActiveAttribute()
+    {
+        return ($this->status) ? true : false;
+    }
+
+    /**
      * register media conversion
      */
     public function registerMediaConversions(Media $media = null)

@@ -7,6 +7,8 @@ use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Boolean;
 
 class User extends Resource
 {
@@ -63,10 +65,18 @@ class User extends Resource
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
+            Text::make('Mobile')->rules('required'),
+
             Password::make('Password')
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
+
+            Select::make('Role')->options(config('roles.list'))
+                ->displayUsingLabels()
+                ->rules('required'),
+
+            Boolean::make('Enabled ?' , 'status')->rules('required')->sortable(),
         ];
     }
 
