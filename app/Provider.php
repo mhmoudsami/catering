@@ -56,4 +56,12 @@ class Provider extends Authenticatable implements HasMedia
     {
         $this->addMediaCollection('image')->singleFile();
     }
+
+    /**
+     * Get the services for the provider.
+     */
+    public function services()
+    {
+        return $this->hasMany('App\Service');
+    }
 }

@@ -2,25 +2,27 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Boolean;
-use MrMonat\Translatable\Translatable;
-use Laravel\Nova\Panel;
+use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use MrMonat\Translatable\Translatable;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
-use Laravel\Nova\Fields\HasMany;
+use EricLagarda\NovaEmbed\Embed;
 
-class Provider extends Resource
+class Service extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = 'App\Provider';
+    public static $model = 'App\Service';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -49,7 +51,7 @@ class Provider extends Resource
         return [
             ID::make()->sortable(),
 
-            HasMany::make('Services'),
+            BelongsTo::make('Provider')->withoutTrashed(),
 
             Translatable::make('Name')
                 ->sortable()
@@ -57,42 +59,38 @@ class Provider extends Resource
 
             Translatable::make('Description')
                 ->sortable()
-                ->rules('required', 'max:255')
-                ->hideFromIndex(),
-
-            Text::make('Responsible Name')
-                ->sortable()
-                ->rules('required', 'max:255')
-                ->hideFromIndex(),
-
-            Text::make('Responsible Mobile')
-                ->sortable()
-                ->rules('required', 'max:255')
-                ->hideFromIndex(),
+                ->hideFromIndex()
+                ->rules('required'),
 
             Images::make('Image', 'image')
                 ->conversionOnIndexView('thumb')
                 ->rules('required'),
 
+            Embed::make('Video Url')->rules('required')->ajax()->hideFromIndex(),
 
+            Currency::make('Price')->rules('required'),
+
+            Currency::make('Extra Person Cost')->rules('required')->hideFromIndex(),
+
+            Number::make('Capacity')->rules('required')->min(1)->max(1000)->step(1),
+
+            Text::make('Duration')->rules('required'),
+
+            Text::make('Prepare Time')->rules('required'),
+
+
+            Select::make("Gender")
+                ->options([
+                    '1' => 'Male',
+                    '2' => 'Female',
+                ])
+                // ->saveAsString()
+                // ->saveUncheckedValues()
+                // ->displayUncheckedValuesOnIndex()
+                // ->displayUncheckedValuesOnDetail()
+                ->hideFromIndex(),
 
             Boolean::make('Active ?' , 'status')->rules('required')->sortable(),
-
-            new Panel('Login Information', [
-
-                Text::make('Email')
-                    ->sortable()
-                    ->rules('required', 'email', 'max:254')
-                    ->creationRules('unique:users,email')
-                    ->updateRules('unique:users,email,{{resourceId}}')
-                    ->hideFromIndex(),
-
-                Password::make('Password')
-                    ->onlyOnForms()
-                    ->creationRules('required', 'string', 'min:8')
-                    ->updateRules('nullable', 'string', 'min:8'),
-
-            ]),
         ];
     }
 
