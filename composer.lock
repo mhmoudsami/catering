@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d928b71cf004bcf7be21f5f965bfb524",
+    "content-hash": "94314b382fa9f15d7c30a4e724f14a63",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -2170,6 +2170,50 @@
                 "serialize"
             ],
             "time": "2019-11-29T22:36:02+00:00"
+        },
+        {
+            "name": "optimistdigital/nova-settings",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/optimistdigital/nova-settings.git",
+                "reference": "5be2d8b704b804eaa2b2f1166ca044948721cb86"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/optimistdigital/nova-settings/zipball/5be2d8b704b804eaa2b2f1166ca044948721cb86",
+                "reference": "5be2d8b704b804eaa2b2f1166ca044948721cb86",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "OptimistDigital\\NovaSettings\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OptimistDigital\\NovaSettings\\": "src/"
+                },
+                "files": [
+                    "./src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova tool for editing custom settings using native Nova fields.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "time": "2020-01-17T17:08:51+00:00"
         },
         {
             "name": "paragonie/random_compat",

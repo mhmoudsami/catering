@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Number;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -16,6 +18,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function boot()
     {
+        \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields($this->settings());
+
         parent::boot();
     }
 
@@ -59,6 +63,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     }
 
     /**
+     * settings
+     */
+    protected function settings()
+    {
+        return [
+            Text::make('Whatsapp Number', 'whatsapp_number'),
+        ];
+    }
+
+    /**
      * Get the cards that should be displayed on the default Nova dashboard.
      *
      * @return array
@@ -87,7 +101,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function tools()
     {
-        return [];
+        return [
+            new \OptimistDigital\NovaSettings\NovaSettings
+        ];
     }
 
     /**
