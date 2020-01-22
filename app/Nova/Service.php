@@ -98,11 +98,9 @@ class Service extends Resource
                 ->options([
                     '1' => 'Male',
                     '2' => 'Female',
+                    '3' => 'Both Genders',
                 ])
-                // ->saveAsString()
-                // ->saveUncheckedValues()
-                // ->displayUncheckedValuesOnIndex()
-                // ->displayUncheckedValuesOnDetail()
+                ->displayUsingLabels()
                 ->hideFromIndex(),
 
             Boolean::make('Enabled ?' , 'status')->rules('required')->sortable(),
