@@ -13,4 +13,12 @@ class City extends Model
     use SoftDeletes, HasTranslations;
 
     public $translatable = ['name'];
+
+    /**
+     * Get City Providers
+     */
+    public function providers()
+    {
+        return $this->belongsToMany('App\Proivder');
+    }
 }

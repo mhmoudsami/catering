@@ -64,4 +64,12 @@ class Provider extends Authenticatable implements HasMedia
     {
         return $this->hasMany('App\Service');
     }
+
+    /**
+     * Get Provider Cities
+     */
+    public function cities()
+    {
+        return $this->belongsToMany('App\City');
+    }
 }

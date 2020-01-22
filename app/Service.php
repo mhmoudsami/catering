@@ -34,4 +34,12 @@ class Service extends Model implements HasMedia
     {
         return $this->belongsTo('App\Provider');
     }
+
+    /**
+     * Get Service Requirements
+     */
+    public function requirements()
+    {
+        return $this->belongsToMany('App\Requirement' , 'requirement_service');
+    }
 }

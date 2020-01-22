@@ -12,6 +12,7 @@ use Laravel\Nova\Panel;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsToMany;
 
 class Provider extends Resource
 {
@@ -50,6 +51,8 @@ class Provider extends Resource
             ID::make()->sortable(),
 
             HasMany::make('Services'),
+
+            BelongsToMany::make('Cities'),
 
             Translatable::make('Name')
                 ->sortable()

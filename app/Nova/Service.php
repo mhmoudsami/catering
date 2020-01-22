@@ -14,6 +14,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use MrMonat\Translatable\Translatable;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use EricLagarda\NovaEmbed\Embed;
+use Laravel\Nova\Fields\BelongsToMany;
 
 class Service extends Resource
 {
@@ -53,6 +54,8 @@ class Service extends Resource
 
             BelongsTo::make('Provider')->withoutTrashed(),
 
+            BelongsToMany::make('Requirements'),
+
             Translatable::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255'),
@@ -66,7 +69,12 @@ class Service extends Resource
                 ->conversionOnIndexView('thumb')
                 ->rules('required'),
 
-            Embed::make('Video Url')->rules('required')->ajax()->hideFromIndex(),
+            Images::make('Gallery', 'gallery')
+                ->hideFromIndex()
+                ->conversionOnIndexView('thumb')
+                ->rules('required'),
+
+            Embed::make('Video Url')->rules('url')->ajax()->hideFromIndex(),
 
             Currency::make('Price')->rules('required'),
 

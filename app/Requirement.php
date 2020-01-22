@@ -13,4 +13,12 @@ class Requirement extends Model
     use SoftDeletes, HasTranslations;
 
     public $translatable = ['name'];
+
+    /**
+     * Get Service Requirements
+     */
+    public function services()
+    {
+        return $this->belongsToMany('App\Service' , 'requirement_service');
+    }
 }
