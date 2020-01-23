@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+// Controllers Within The "App\Http\Controllers\Admin" Namespace
+Route::namespace('API')->group(function () {
+	Route::get('app/data', 'AppController@index');
+	Route::get('providers', 'ProviderController@index');
 });
