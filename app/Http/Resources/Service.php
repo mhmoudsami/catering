@@ -27,7 +27,7 @@ class Service extends JsonResource
             'capacity' => $this->capacity,
             'duration' => $this->duration,
             'prepare_time' => $this->prepare_time,
-            'gender' => $this->gender,
+            'gender' => $this->getGenderLabel(),
             'image' => $this->getFirstMediaUrl('image'),
             'gallery' => MediaResource::collection($this->getMedia('gallery')),
         ];

@@ -62,6 +62,14 @@ class Service extends Model implements HasMedia
     }
 
     /**
+     * get gender label
+     */
+    public function getGenderLabel()
+    {
+        return config('gender.list')[$this->gender];
+    }
+
+    /**
      * Scope a query to only include active services.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
