@@ -85,4 +85,15 @@ class User extends Authenticatable
         }
         return ($this->role == 3) ? true : false;
     }
+
+    /**
+     * Scope a query to only include active services.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where(['status' => 1]);
+    }
 }

@@ -21,4 +21,15 @@ class Requirement extends Model
     {
         return $this->belongsToMany('App\Service' , 'requirement_service');
     }
+
+    /**
+     * Scope a query to only include active services.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where(['status' => 1]);
+    }
 }
