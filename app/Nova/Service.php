@@ -95,11 +95,7 @@ class Service extends Resource
 
 
             Select::make("Gender")
-                ->options([
-                    '1' => 'Male',
-                    '2' => 'Female',
-                    '3' => 'Both Genders',
-                ])
+                ->options(config('gender.list'))
                 ->displayUsingLabels()
                 ->hideFromIndex(),
 

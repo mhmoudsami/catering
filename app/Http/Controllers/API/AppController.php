@@ -24,6 +24,7 @@ class AppController extends Controller
     		'settings' => nova_get_settings(),
     		'cities'   => CityResource::collection($cities),
     		'requirements'   => RequirementResource::collection($requirements),
+            'gender' => config('gender.list'),
     	]);
 
     	return $collection;
