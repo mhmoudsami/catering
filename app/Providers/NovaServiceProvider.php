@@ -8,6 +8,7 @@ use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Boolean;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -69,6 +70,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             Text::make('Whatsapp Number', 'whatsapp_number'),
+            Boolean::make('Enable Whatsapp', 'whatsapp_number_status'),
         ];
     }
 
