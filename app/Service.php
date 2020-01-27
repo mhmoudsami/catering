@@ -25,6 +25,9 @@ class Service extends Model implements HasMedia
      */
     protected $casts = [
         'requirements' => 'array',
+        'price' => 'double',
+        'extra_person_cost' => 'double',
+        'capacity' => 'integer',
     ];
 
     /**

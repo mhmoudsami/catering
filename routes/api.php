@@ -18,4 +18,7 @@ use Illuminate\Http\Request;
 Route::namespace('API')->group(function () {
 	Route::get('app/data', 'AppController@index');
 	Route::get('providers', 'ProviderController@index');
+	Route::get('providers/{provider}', 'ProviderController@show');
+	Route::get('providers/{provider}/services', 'ProviderController@services');
+	Route::get('providers/{provider}/services/{service}', 'ProviderController@service');
 });

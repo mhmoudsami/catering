@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Http\Resources\Service as ServiceResource;
+use App\Http\Resources\City as CityResource;
 
 class Provider extends JsonResource
 {
@@ -28,6 +29,7 @@ class Provider extends JsonResource
             'order' => $this->order,
             'image' => $this->getFirstMediaUrl('image'),
             'services' => ServiceResource::collection($this->whenLoaded('services')),
+            'cities' => CityResource::collection($this->cities),
         ];
     }
 }

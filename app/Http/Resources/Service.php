@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Http\Resources\Media as MediaResource;
+use App\Http\Resources\Requirement as RequirementResource;
 
 class Service extends JsonResource
 {
@@ -30,6 +31,7 @@ class Service extends JsonResource
             'gender' => $this->getGenderLabel(),
             'image' => $this->getFirstMediaUrl('image'),
             'gallery' => MediaResource::collection($this->getMedia('gallery')),
+            'requirements' => RequirementResource::collection($this->whenLoaded('requirements')),
         ];
     }
 }
