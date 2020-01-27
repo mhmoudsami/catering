@@ -16,9 +16,16 @@ use Illuminate\Http\Request;
 
 // Controllers Within The "App\Http\Controllers\Admin" Namespace
 Route::namespace('API')->group(function () {
+	// main
 	Route::get('app/data', 'AppController@index');
+
+	// providers
 	Route::get('providers', 'ProviderController@index');
 	Route::get('providers/{provider}', 'ProviderController@show');
 	Route::get('providers/{provider}/services', 'ProviderController@services');
 	Route::get('providers/{provider}/services/{service}', 'ProviderController@service');
+
+	// pages
+	Route::get('pages', 'PagesController@index');
+	Route::get('pages/{slug}', 'PagesController@index');
 });
