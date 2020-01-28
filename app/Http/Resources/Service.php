@@ -31,7 +31,7 @@ class Service extends JsonResource
             'gender' => $this->getGenderLabel(),
             'image' => $this->getFirstMediaUrl('image'),
             'gallery' => MediaResource::collection($this->getMedia('gallery')),
-            'requirements' => RequirementResource::collection($this->whenLoaded('requirements')),
+            'requirements' => RequirementResource::collection($this->requirements),
         ];
     }
 }
