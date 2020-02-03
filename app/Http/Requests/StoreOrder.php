@@ -8,6 +8,7 @@ use App\City;
 use App\User;
 use App\Order;
 use App\Service;
+use Illuminate\Support\Facades\Hash;
 
 class StoreOrder extends FormRequest
 {
