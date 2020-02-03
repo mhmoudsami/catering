@@ -89,4 +89,18 @@ class ProviderController extends Controller
 
         return new ServiceResource($service);
     }
+
+    /**
+     * return a list of providers with user selected ids
+     */
+    public function favourites()
+    {
+        if ( ! $ids = request('ids' , []) ) {
+            return [];
+        }
+        // active providers
+        $providers = Provider::active()->whereIn('id' , $ids);
+
+        return new ProviderCollection($providers->paginate(8));
+    }
 }

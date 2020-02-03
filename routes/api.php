@@ -19,6 +19,9 @@ Route::namespace('API')->group(function () {
 	// main
 	Route::get('app/data', 'AppController@index');
 
+
+	Route::get('favourites', 'ProviderController@favourites');
+
 	// providers
 	Route::get('providers', 'ProviderController@index');
 	Route::get('providers/{provider}', 'ProviderController@show');
