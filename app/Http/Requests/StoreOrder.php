@@ -47,6 +47,7 @@ class StoreOrder extends FormRequest
      */
     public function store($validated)
     {
+        $request = $this;
         $validated = $this->validated();
 
         $user = User::where(['mobile' => $this->mobile])->first();
