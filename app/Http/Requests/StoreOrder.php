@@ -9,6 +9,7 @@ use App\User;
 use App\Order;
 use App\Service;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\NewOrder as NewOrderNotification;
 
 class StoreOrder extends FormRequest
 {
@@ -100,6 +101,11 @@ class StoreOrder extends FormRequest
             'user_id' => $user->id,
             'provider_id' => $provider->id,
         ]);
+
+        # disable this notifications for now
+        # you still have aproblem in sending mails locally
+        // $notifyable = User::whereJsonContains('notifications->new_order', true)->active()->get();
+        // \Notification::send($notifyable, new NewOrderNotification($order));
 
         return $order;
     }
