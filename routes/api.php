@@ -30,7 +30,7 @@ Route::namespace('API')->group(function () {
 
 	// orders
 	// Route::get('orders' , 'OrdersController@index');
-	Route::post('orders' , 'OrdersController@store');
+	Route::post('/orders' , 'OrdersController@store');
 
 	// pages
 	Route::get('pages', 'PagesController@index');
