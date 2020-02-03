@@ -9,7 +9,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\TextArea;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -89,7 +89,7 @@ class Order extends Resource
                 ->hideFromIndex()
                 ,
 
-            TextArea::make('Notes')
+            Textarea::make('Notes')
                 ->sortable()
                 ->rules('required', 'max:255')
                 // ->hideFromIndex()
