@@ -10,6 +10,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Panel;
+use Fourstacks\NovaCheckboxes\Checkboxes;
 
 class User extends Resource
 {
@@ -80,6 +82,15 @@ class User extends Resource
                 ->rules('required'),
 
             Boolean::make('Enabled ?' , 'status')->rules('required')->sortable(),
+
+            new Panel(__('Notifications'), [
+                Checkboxes::make(__('Allow Notifications'), 'notifications')
+                    ->options(config('catering.notification_types'))
+                    ->saveUncheckedValues()
+                    ->displayUncheckedValuesOnIndex()
+                    ->displayUncheckedValuesOnDetail()
+                    ->hideFromIndex(),
+            ]),
         ];
     }
 
