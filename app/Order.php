@@ -78,4 +78,12 @@ class Order extends Model
 	{
 		return $this->belongsTo('App\City');
 	}
+
+	/**
+	 * get order comments
+	 */
+	public function comments()
+	{
+		return $this->hasMany('App\OrderNote' , 'order_id' , 'id');
+	}
 }

@@ -50,6 +50,8 @@ class Order extends Resource
         return [
             ID::make()->sortable(),
 
+            HasMany::make('OrderNote' , 'comments'),
+
             Select::make("Status")
                 ->options(config('catering.order_statuses'))
                 ->displayUsingLabels()
