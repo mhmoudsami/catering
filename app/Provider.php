@@ -90,6 +90,14 @@ class Provider extends Authenticatable implements HasMedia
     }
 
     /**
+     * get user orders
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
+    /**
      * Scope a query to only include active services.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
@@ -98,5 +106,13 @@ class Provider extends Authenticatable implements HasMedia
     public function scopeActive($query)
     {
         return $query->where(['status' => 1]);
+    }
+
+    /**
+     * get site percentage from this provider
+     */
+    public function getPercentage()
+    {
+        return 10;
     }
 }

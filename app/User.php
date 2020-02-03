@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email','mobile', 'password',
     ];
 
     /**
@@ -95,5 +95,13 @@ class User extends Authenticatable
     public function scopeActive($query)
     {
         return $query->where(['status' => 1]);
+    }
+
+    /**
+     * get user orders
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
     }
 }

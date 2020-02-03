@@ -65,6 +65,14 @@ class Service extends Model implements HasMedia
     }
 
     /**
+     * get user orders
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
+    /**
      * get gender label
      */
     public function getGenderLabel()

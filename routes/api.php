@@ -28,6 +28,10 @@ Route::namespace('API')->group(function () {
 	Route::get('providers/{provider}/services', 'ProviderController@services');
 	Route::get('providers/{provider}/services/{service}', 'ProviderController@service');
 
+	// orders
+	// Route::get('orders' , 'OrdersController@index');
+	Route::post('orders' , 'OrdersController@store');
+
 	// pages
 	Route::get('pages', 'PagesController@index');
 	Route::get('pages/{slug}', 'PagesController@index');

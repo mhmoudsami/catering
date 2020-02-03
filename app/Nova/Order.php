@@ -5,31 +5,30 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Password;
-use Laravel\Nova\Fields\Boolean;
-use MrMonat\Translatable\Translatable;
-use Laravel\Nova\Panel;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\TextArea;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\BelongsToMany;
-use Fourstacks\NovaCheckboxes\Checkboxes;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Provider extends Resource
+class Order extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = 'App\Provider';
+    public static $model = 'App\Order';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -37,15 +36,8 @@ class Provider extends Resource
      * @var array
      */
     public static $search = [
-        'id','name','description'
+        'id',
     ];
-
-    /**
-     * The logical group associated with the resource.
-     *
-     * @var string
-     */
-    public static $group = 'Providers';
 
     /**
      * Get the fields displayed by the resource.
@@ -58,52 +50,60 @@ class Provider extends Resource
         return [
             ID::make()->sortable(),
 
-            HasMany::make('Services'),
-            HasMany::make('Orders'),
+            Select::make("Status")
+                ->options(config('catering.order_statuses'))
+                ->displayUsingLabels()
+                // ->hideFromIndex()
+            ,
 
-            BelongsToMany::make('Cities'),
+            Date::make('Date')->rules('required')->sortable()
+                ,
 
-            Translatable::make('Name')
-                ->sortable()
-                ->rules('required', 'max:255'),
+            Number::make('Persons Count')->rules('required')->min(1)->max(1000)->step(1)->sortable()
+                ,
 
-            Translatable::make('Description')
-                ->sortable()
-                ->rules('required', 'max:255')
-                ->hideFromIndex(),
-
-            Text::make('Responsible Name')
+            Text::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255')
-                ->hideFromIndex(),
+                // ->hideFromIndex()
+                ,
 
-            Text::make('Responsible Mobile')
+            Text::make('Mobile')
                 ->sortable()
                 ->rules('required', 'max:255')
-                ->hideFromIndex(),
+                // ->hideFromIndex()
+                ,
 
-            Images::make('Image', 'image')
-                ->conversionOnIndexView('thumb')
-                ->rules('required'),
+            Text::make('Email')
+                ->sortable()
+                ->rules('required', 'max:255')
+                ->hideFromIndex()
+                ,
 
+            BelongsTo::make('City')->withoutTrashed()->sortable()
+                ,
 
-            Boolean::make('Enabled ?' , 'status')->rules('required')->sortable(),
+            Text::make('Address')
+                ->sortable()
+                ->rules('required', 'max:255')
+                ->hideFromIndex()
+                ,
 
-            new Panel('Login Information', [
+            TextArea::make('Notes')
+                ->sortable()
+                ->rules('required', 'max:255')
+                // ->hideFromIndex()
+                ,
 
-                Text::make('Email')
-                    ->sortable()
-                    ->rules('required', 'email', 'max:254')
-                    ->creationRules('unique:users,email')
-                    ->updateRules('unique:users,email,{{resourceId}}')
-                    ->hideFromIndex(),
+            Currency::make('Subtotal')->rules('required')->sortable()
+                ,
 
-                Password::make('Password')
-                    ->onlyOnForms()
-                    ->creationRules('required', 'string', 'min:8')
-                    ->updateRules('nullable', 'string', 'min:8'),
+            Currency::make('Total')->rules('required')->sortable()
+                ,
 
-            ]),
+            BelongsTo::make('User')->withoutTrashed()->hideFromIndex(),
+            BelongsTo::make('Provider')->withoutTrashed()->hideFromIndex(),
+            BelongsTo::make('Service')->withoutTrashed()->hideFromIndex(),
         ];
     }
 

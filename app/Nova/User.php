@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\HasMany;
 
 class User extends Resource
 {
@@ -54,6 +55,8 @@ class User extends Resource
             ID::make()->sortable(),
 
             Gravatar::make(),
+
+            HasMany::make('Orders'),
 
             Text::make('Name')
                 ->sortable()

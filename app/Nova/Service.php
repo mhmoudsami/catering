@@ -15,6 +15,7 @@ use MrMonat\Translatable\Translatable;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use EricLagarda\NovaEmbed\Embed;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\HasMany;
 
 class Service extends Resource
 {
@@ -62,6 +63,8 @@ class Service extends Resource
             BelongsTo::make('Provider')->withoutTrashed(),
 
             BelongsToMany::make('Requirements'),
+            
+            HasMany::make('Orders'),
 
             Translatable::make('Name')
                 ->sortable()
