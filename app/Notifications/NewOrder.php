@@ -46,10 +46,15 @@ class NewOrder extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!')
-                    ->from('test@test.com');
+                    ->greeting('You Have New Order')
+                    ->subject('New Catering Order')
+                    ->line("Name : {$this->order->name}")
+                    ->line("Email : {$this->order->email}")
+                    ->line("Mobile : {$this->order->mobile}")
+                    ->line("Notes : {$this->order->notes}")
+                    ->line("Subtotal : {$this->order->subtotal}")
+                    ->line("Total : {$this->order->total}")
+                    ->action('View Order', url("/backend/resources/orders/{$this->order->id}"));
     }
 
     /**

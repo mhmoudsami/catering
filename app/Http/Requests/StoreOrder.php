@@ -104,8 +104,8 @@ class StoreOrder extends FormRequest
 
         # disable this notifications for now
         # you still have aproblem in sending mails locally
-        // $notifyable = User::whereJsonContains('notifications->new_order', true)->active()->get();
-        // \Notification::send($notifyable, new NewOrderNotification($order));
+        $notifyable = User::whereJsonContains('notifications->new_order', true)->active()->get();
+        \Notification::send($notifyable, new NewOrderNotification($order));
 
         return $order;
     }
