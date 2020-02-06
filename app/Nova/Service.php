@@ -82,9 +82,9 @@ class Service extends Resource
             Images::make('Gallery', 'gallery')
                 ->hideFromIndex()
                 ->conversionOnIndexView('thumb')
-                ->rules('required'),
+                ,
 
-            Embed::make('Video Url')->rules('url')->ajax()->hideFromIndex(),
+            Embed::make('Video Url')->ajax()->hideFromIndex(),
 
             Currency::make('Price')->rules('required'),
 
