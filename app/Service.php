@@ -77,7 +77,12 @@ class Service extends Model implements HasMedia
      */
     public function getGenderLabel()
     {
-        return config('gender.list')[$this->gender];
+        $list = config('gender.list_ar');
+
+        if ( app()->getLocale() == 'en' ) {
+            $list = config('gender.list');
+        }
+        return $list[$this->gender];
     }
 
     /**

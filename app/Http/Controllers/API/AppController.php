@@ -24,9 +24,23 @@ class AppController extends Controller
     		'settings' => nova_get_settings(),
     		'cities'   => CityResource::collection($cities),
     		'requirements'   => RequirementResource::collection($requirements),
-            'gender' => config('gender.list'),
+            'gender' => $this->getGenderList(),
     	]);
 
     	return $collection;
+    }
+
+    /**
+     * get gender list
+     */
+    public function getGenderList()
+    {
+        $list = config('gender.list_ar');
+
+        if ( app()->getLocale() == 'en' ) {
+            $list = config('gender.list');
+        }
+
+        return $list;
     }
 }
