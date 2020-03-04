@@ -9,8 +9,10 @@ use Laravel\Nova\NovaApplicationServiceProvider;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Boolean;
+use App\Comment;
 use App\OrderNote;
 use App\Observers\OrderNoteObserver;
+use App\Observers\CommentObserver;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -30,6 +32,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
         Nova::serving(function () {
             OrderNote::observe(OrderNoteObserver::class);
+            Comment::observe(CommentObserver::class);
         });
     }
 

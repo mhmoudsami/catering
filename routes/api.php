@@ -32,6 +32,9 @@ Route::namespace('API')->group(function () {
 	// Route::get('orders' , 'OrdersController@index');
 	Route::post('/orders' , 'OrdersController@store');
 
+	// contact us
+	Route::post('/contactus' , 'ContactController@store');
+
 	// pages
 	Route::get('pages', 'PagesController@index');
 	Route::get('pages/{slug}', 'PagesController@index');
