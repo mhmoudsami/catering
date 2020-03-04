@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Trix;
@@ -49,14 +50,17 @@ class OrderNote extends Resource
      */
     public function fields(Request $request)
     {
+        Textarea::macro('showOnIndex', function($bool = false){
+            $this->showOnIndex = $bool;
+            return $this;
+        });
+
         return [
             ID::make()->sortable(),
             BelongsTo::make('Order')->withoutTrashed(),
-            BelongsTo::make('User')->withoutTrashed(),
-            Trix::make('Comment' , 'note')
-                ->rules('required')
-                // ->hideFromIndex()
-            ,
+            BelongsTo::make('User')->exceptOnForms()->withoutTrashed(),
+
+            Textarea::make(__('Comment') , 'note')->rules('required')->alwaysShow()->showOnIndex(true),
         ];
     }
 
@@ -102,5 +106,23 @@ class OrderNote extends Resource
     public function actions(Request $request)
     {
         return [];
+    }
+
+    /**
+     * Return the location to redirect the user after creation.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param  \App\Nova\Resource  $resource
+     * @return string
+     */
+    public static function redirectAfterCreate(NovaRequest $request, $resource)
+    {
+        $prev = app('Illuminate\Routing\UrlGenerator')->previous();
+        $arr = parse_url($prev);
+        parse_str($arr['query'] , $query);
+        $viaResource = $query['viaResource'];
+        $viaResourceId = $query['viaResourceId'];
+        
+        return "/resources/{$viaResource}/{$viaResourceId}";
     }
 }

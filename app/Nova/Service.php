@@ -91,6 +91,7 @@ class Service extends Resource
             Currency::make('Extra Person Cost')->rules('required')->hideFromIndex(),
 
             Number::make('Capacity')->rules('required')->min(1)->max(1000)->step(1),
+            Number::make('Max Persons')->rules('required' , 'gte:capacity')->min(0)->step(1),
 
             Text::make('Duration')->rules('required'),
 

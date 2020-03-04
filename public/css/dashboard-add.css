@@ -1,0 +1,20 @@
+.status-label{
+    display: inline-block;
+    background: #000;
+    font-size: 14px;
+    padding: 3px 6px;
+    border-radius: 3px;
+    color: #fff;
+}
+.status-label-new{
+	background: blue;
+}
+.status-label-canceled{
+	background: red;
+}
+.status-label-processing{
+	background: purple;
+}
+.status-label-done{
+	background: green;
+}

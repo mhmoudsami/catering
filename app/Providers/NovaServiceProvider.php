@@ -9,6 +9,8 @@ use Laravel\Nova\NovaApplicationServiceProvider;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Boolean;
+use App\OrderNote;
+use App\Observers\OrderNoteObserver;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -19,9 +21,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function boot()
     {
+        parent::boot();
+        
         \OptimistDigital\NovaSettings\NovaSettings::addSettingsFields($this->settings());
 
-        parent::boot();
+        Nova::style('admin', public_path('css/dashboard-add.css'));
+
+
+        Nova::serving(function () {
+            OrderNote::observe(OrderNoteObserver::class);
+        });
     }
 
     /**

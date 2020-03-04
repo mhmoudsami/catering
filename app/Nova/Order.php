@@ -53,10 +53,20 @@ class Order extends Resource
             HasMany::make('OrderNote' , 'comments'),
 
             Select::make("Status")
+                ->sortable()
                 ->options(config('catering.order_statuses'))
                 ->displayUsingLabels()
-                // ->hideFromIndex()
-            ,
+                ->onlyOnForms()
+                ,
+            Text::make("Status")->displayUsing(function ($status) {
+                    return view('partials.status-label', [
+                        'status' => $status,
+                        'label'  => config('catering.order_statuses')[$status]
+                    ])->render();
+                })
+                ->asHtml()
+                ->exceptOnForms()
+                ,
 
             Date::make('Date')->rules('required')->sortable()
                 ,
@@ -128,7 +138,9 @@ class Order extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new \App\Nova\Filters\OrderStatus,
+        ];
     }
 
     /**
@@ -150,6 +162,10 @@ class Order extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new \App\Nova\Actions\ChangeOrderStatus)->canRun(function ($request, $user) {
+                return true;
+            }),
+        ];
     }
 }

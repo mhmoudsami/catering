@@ -7,8 +7,9 @@ return [
 	 */
 	'order_statuses' => [
 		1 => 'new',
-		2 => 'accepted',
-		3 => 'rejected'
+		2 => 'processing',
+		3 => 'canceled',
+		4 => 'done',
 	],
 	/**
 	 * notification type
