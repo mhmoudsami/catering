@@ -52,7 +52,7 @@ class StoreOrder extends FormRequest
         $request = $this;
         $validated = $this->validated();
 
-        $user = User::where(['mobile' => $this->mobile])->first();
+        $user = User::where(['mobile' => $this->mobile])->orWhere(['email' => $this->email])->first();
 
         # if user doesnt exist , create new user with the available information
         # remember to send the user notification with his credentials
