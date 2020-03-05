@@ -86,6 +86,14 @@ class Service extends Model implements HasMedia
     }
 
     /**
+     * get max persons count
+     */
+    public function getMaxPersons()
+    {
+        return ( $this->max_persons == 0 ) ? $this->capacity : $this->max_persons;
+    }
+
+    /**
      * Scope a query to only include active services.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query

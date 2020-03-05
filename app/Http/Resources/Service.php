@@ -26,7 +26,7 @@ class Service extends JsonResource
             'price' => $this->price,
             'extra_person_cost' => $this->extra_person_cost,
             'capacity' => $this->capacity,
-            'max_persons' => $this->max_persons,
+            'max_persons' => $this->getMaxPersons(),
             'duration' => $this->duration,
             'prepare_time' => $this->prepare_time,
             'gender' => $this->getGenderLabel(),
